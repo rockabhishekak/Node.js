@@ -1,0 +1,16 @@
+import {createServer} from 'net'
+let server = createServer((socket)=>{
+    console.log('client connected')
+    socket.on('data',(data)=>{
+        console.log(data.toString())
+        socket.write('hello this is server')
+    })
+    socket.on('end',()=>{
+        console.log('client disconnected')
+        socket.end()
+    })
+
+})
+server.listen(2000,()=>{
+    console.log('server is listening')
+})
