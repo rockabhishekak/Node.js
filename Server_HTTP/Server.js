@@ -2,7 +2,20 @@ import {createServer} from 'http'
 let port = 3000;
 let server = createServer((req,res)=>{
     res.write("Hello This is server");
-    console.log(req.url);
+    // console.log(req.url);
+    // if(req.url=='/')
+    // {
+    //     console.log("Everything");
+        
+    // }
+    // else if(req.closed){
+    //     console.log("Closed")
+    // }
+    // else{
+    //     console.log("Nothing")
+    // }
+
+
     res.end();
 
 });
