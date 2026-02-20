@@ -9,7 +9,7 @@ let server = createServer((req, res) => {//always sequeance is same as request ,
     let log = `${new Date().toLocaleString()} , url:${req.url}`
 
     fs.writeFile('getserver.txt', log + '\n', { flag: 'a' }, (err) => {
-        if (err) console.log(err);
+        if(err) console.log(err);
         else console.log('log added')
     })
 
