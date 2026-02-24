@@ -9,15 +9,22 @@ let __dirname = dirname(__filename)
 
 
 let server = express();
-server.get('/', (req,res)=>{
-    res.sendFile(path.join(__dirname,'index.html'))
+server.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'index.html'))
 })
 
-server.get('/about',(req,res)=>{
-    res.sendFile(path.join(__dirname,'about.html'))
+server.get('/about', (req, res) => {
+    res.sendFile(path.join(__dirname, 'about.html'))
 })
-server.get('/contact',(req,res)=>{
-    res.sendFile(path.join(__dirname,'contact.html'))
+server.get('/contact', (req, res) => {
+    res.sendFile(path.join(__dirname, 'contact.html'))
+})
+server.get('/submit', (req, res) => {
+    let { uname, email, password } = req.query;
+    fs.appendFileSync('data.txt', `Username: ${uname} Email: ${email} Password: ${password}\n`)
+    // res.send("thank you for submitting the form")
+    res.sendFile(path.join(__dirname, 'contact.html'))
+    // res.end();
 })
 
 // server.get('/', (req, res) => {
