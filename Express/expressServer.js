@@ -1,15 +1,28 @@
 import express from 'express';
-let server  = express();
-server.get('/',(req,res)=>{
-    console.log(req.url)
-    res.send("Hello World");
+import fs from 'fs';
+let server = express();
+server.get('/', (req, res) => {
+    let index = fs.readFileSync('index.html', 'utf-8');
+    res.writeHead(200, { 'Content-Type': 'text/html' });
+    res.write(index);
+    res.end();
 })
-server.get('/about',(req,res)=>{
-    res.send("About");
-    
+server.get('/about', (req, res) => {
+    // res.send("About");
+    let about = fs.readFileSync('about.html', 'utf-8');
+    res.writeHead(200, { 'Content-Type': 'text/html' });
+    res.write(about);
+    res.end();
+
+
 })
-server.get('/contact',(req,res)=>{
-    
-    res.send("Contact Us");
+server.get('/contact', (req, res) => {
+
+    let contact = fs.readFileSync('contact.html', 'utf-8');
+    res.writeHead(200, { 'Content-Type': 'text/html' });
+    res.write(contact);
+    res.end();
 })
-server.listen(3000,()=>{});
+server.listen(3000, () => {
+    console.log('server is ready to work')
+})
