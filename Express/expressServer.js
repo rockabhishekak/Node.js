@@ -20,10 +20,38 @@ server.get('/contact', (req, res) => {
     res.sendFile(path.join(__dirname, 'contact.html'))
 })
 server.get('/submit', (req, res) => {
-    let { uname, email, password } = req.query;
-    fs.appendFileSync('data.txt', `Username: ${uname} Email: ${email} Password: ${password}\n`)
+    // let submitdata = req.query;
+    // console.log(submitdata);
+
+
+
+    fs.readFile('student.txt', 'utf-8', (err, data) => {
+        if (err) {
+            console.log(err);
+        } else {
+            let parsedData = JSON.parse(data);
+            parsedData.push(req.query);
+            fs.writeFile('student.txt', JSON.stringify(parsedData), (err) => {
+                if (err) {
+                    console.log(err);
+                } else {
+                    res.send("thank you for submitting the form")
+                }
+            })
+        }
+    })
+
+
+
+
+
+
+
+
+    // let { uname, email, password } = req.query;
+    // fs.appendFileSync('data.txt', `Username: ${uname} Email: ${email} Password: ${password}\n`)
     // res.send("thank you for submitting the form")
-    res.sendFile(path.join(__dirname, 'contact.html'))
+    // res.sendFile(path.join(__dirname, 'contact.html'))
     // res.end();
 })
 
