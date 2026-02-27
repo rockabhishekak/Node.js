@@ -9,6 +9,11 @@ let __dirname = dirname(__filename)
 
 
 let server = express();
+
+
+// new line added for post request
+server.use(express.urlencoded({ extended: true }))
+
 server.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'index.html'))
 })
@@ -19,7 +24,7 @@ server.get('/about', (req, res) => {
 server.get('/contact', (req, res) => {
     res.sendFile(path.join(__dirname, 'contact.html'))
 })
-server.get('/submit', (req, res) => {
+server.post('/submit', (req, res) => {
     // let submitdata = req.query;
     // console.log(submitdata);
 
@@ -30,7 +35,8 @@ server.get('/submit', (req, res) => {
             console.log(err);
         } else {
             let parsedData = JSON.parse(data);
-            parsedData.push(req.query);
+            // parsedData.push(req.query);
+            parsedData.push(req.body);
             fs.writeFile('student.txt', JSON.stringify(parsedData), (err) => {
                 if (err) {
                     console.log(err);
