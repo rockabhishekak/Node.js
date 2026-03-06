@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Home</title>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script> -->
+</head>
+<body>
+    <h2>Single Value Messaging</h2>
+    <div id="display" style="background: white; padding: 10px; margin-bottom: 10px;">Waiting for messages...</div>
+    <input id="inp" type="text" placeholder="Type value..">
+    <button onclick="send()">Send</button>
+
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        const socket = io();
+
+        function send() {
+            const value = document.getElementById('inp').value;
+            socket.emit('client-msg', value);//Sirf value bhej di
+            document.getElementById('inp').value = '';
+        }
+        //Server se aane wali single vaue pakadna 
+        socket.on('server-msg', (data) => {
+            document.getElementById('display').innerText = data;//Sirf value display kar di
+        });
+    </script>
+</body>
+</html>
