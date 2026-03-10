@@ -4,11 +4,11 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
 let __filename = fileURLToPath(import.meta.url);
-let __dirname = dirname(__filename)
+export let __dirname = dirname(__filename)
 
 
 
-let server = express();
+export let server = express();
 
 
 // new line added for post request

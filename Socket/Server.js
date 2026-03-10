@@ -10,6 +10,7 @@ import { fileURLToPath } from 'url';
 const app = express();
 const ourserver = http.createServer(app);
 const io = new Server(ourserver);
+// ourserver.use(cookieParser());
 
 let _dirname = dirname(fileURLToPath(import.meta.url));
 
@@ -18,7 +19,9 @@ const rl = readline.createInterface({
     input: process.stdin,
     output: process.stdout
 });
-
+// app.get('/setcookie', (req, res) => {
+//     res.cookie('username', 'name',{maxAge: 10000}).send('Cookie has been set!');
+// });
 app.get('/', (req, res) => {
     res.sendFile(_dirname + '/index.html');
 });
