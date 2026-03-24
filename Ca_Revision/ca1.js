@@ -7,15 +7,14 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 app.use(express.urlencoded({extended : true}));
 
-app.get('/',(req,res)=>{
-    res.sendFile(path.join(__dirname,"index.html"));
+app.get("/",(req,res)=>{
+    res.sendFile(path.join(__dirname,'index.html'));
 });
 app.get("/contact",(req,res)=>{
-    res.sendFile(path.join(__dirname,"contact.html"));
+    res.sendFile(path.join(__dirname,'contact.html'));
 });
 
 app.post("/submit",(req,res)=>{
-    console.log("req recieved");
     console.log(req.body);
     let {name, email} = req.body;
     fs.readFile("contact.txt","utf-8",(err,data)=>{
