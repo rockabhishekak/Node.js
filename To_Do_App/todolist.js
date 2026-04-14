@@ -1,0 +1,39 @@
+import express from 'express';
+import bodyParser from "body-parser";
+import { Client } from 'pg';
+const app = express();
+app.use(bodyParser.urlencoded({ extended: true }));
+// connet to the database
+const client = new Client({
+    user: 'postgres',
+    host: 'localhost',
+    database: 'todo_db',
+    password: 'Abhi@123',
+    port: 5432,
+});
+client.connect();
+
+
+app.get('/', (req, res) => {
+    res.sendFile(import.meta.dirname + '/index.html');
+});
+app.post('/add-task', (req, res) => {
+    console.log("Request received:", req.body);
+    const task = req.body.task_name;
+    console.log("Task to add:", task);
+    client.query('INSERT INTO tasks (task_name, status) VALUES ($1, $2)', [task, 'pending'], (err, result) => {
+        if (err) {
+            console.error('Error adding task:', err);
+            res.send('Error adding task');
+        } else {
+            console.log('Task added successfully');
+            res.send('Task added successfully');
+        }
+    });
+});
+app.listen(3000, () => {
+    console.log('Server is running on port 3000');
+});
+
+// sql commands
+// create table tasks(id serial, primary key, task_name varchar(255), status varchar(20) default 'pending');

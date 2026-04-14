@@ -27,7 +27,7 @@ app.post("/submit",(req,res)=>{
             if(err){
                 return res.send("Error saving contact");
             }
-            res.send("Contact saved successfully");
+            res.sendFile(path.join(__dirname,'index.html'));
         });
 
     });

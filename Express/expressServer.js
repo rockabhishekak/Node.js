@@ -11,7 +11,7 @@ export let __dirname = dirname(__filename)
 export let server = express();
 
 
-// new line added for post request
+// new line added for post request and this is middleware to parse the form data
 server.use(express.urlencoded({ extended: true }))
 
 server.get('/', (req, res) => {
