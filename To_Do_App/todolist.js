@@ -51,15 +51,19 @@
 import express from 'express';
 import bodyParser from "body-parser";
 import pkg from '@prisma/client';
+import path from 'path';
+import { fileURLToPath } from 'url';
 const { PrismaClient } = pkg;
 
 const app = express();
 const prisma = new PrismaClient();
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.get('/', (req, res) => {
-    res.sendFile(import.meta.dirname + '/index.html');
+    res.sendFile(path.join(__dirname, 'index.html'));
 });
 
 app.post('/add-task', async (req, res) => {
